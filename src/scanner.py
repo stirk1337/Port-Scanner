@@ -1,42 +1,24 @@
-import socket
-from queue import Queue
-from threading import Thread, Lock
+from socket import socket
+from threading import Thread
 
-THREADS = 200
-lock = Lock()
+answer = []
 
 
-def port_scan(ip, port, answer):
+def port_scanner(ip, port):
+    s = socket()
+    status = 'close'
     try:
-        s = socket.socket()
+        s.settimeout(1)
         s.connect((ip, port))
-        s.settimeout(0.2)
+        status = 'open'
     except:
-        s.close()
-        with lock:
-            answer.append({"port": port, "state": "close"})
-    else:
-        s.close()
-        with lock:
-            answer.append({"port": port, "state": "open"})
-    finally:
-        s.close()
-
-
-def scan_worker(ip, q, answer):
-    while True:
-        port = q.get()
-        port_scan(ip, port, answer)
-        q.task_done()
+        pass
+    answer.append({"port": port, "status": status})
 
 
 def scanner(ip, start, end):
-    answer = []
-    q = Queue()
-    for t in range(THREADS):
-        t = Thread(target=scan_worker, args=(ip, q, answer), daemon=True)
+    answer.clear()
+    for port in range(start, end + 1):
+        t = Thread(target=port_scanner, args=(ip, port))
         t.start()
-    for port in range(start, end+1):
-        q.put(port)
-    q.join()
     return answer
