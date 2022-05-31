@@ -1,5 +1,5 @@
 import src.views
 
 routes = [
-    ('GET', '/scan', src.views.port_scanner),
+    ('GET', '/scan/{ip}/{start}/{end}', src.views.ports_scanner),
 ]
