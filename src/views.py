@@ -1,9 +1,12 @@
 from aiohttp import web
 from src.scanner import scanner
+from src.logger import log
 import socket
+import syslog
 
 
 async def ports_scanner(request):
+    log(syslog.LOG_INFO, request)
     ip = request.match_info['ip']
     try:
         s = socket.socket()
