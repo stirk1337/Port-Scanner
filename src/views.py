@@ -19,6 +19,8 @@ async def ports_scanner(request):
     except ValueError:
         log(syslog.LOG_ERR, request)
         return web.Response(text="Invalid port.")
+    finally:
+        s.close()
     answer = scanner(ip, start, end)
     return web.json_response(answer)
 

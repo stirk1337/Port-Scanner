@@ -10,6 +10,7 @@ def port_scanner(ip, port, answer):
         answer.append({"port": port, "status": "open"})
     except TimeoutError:
         answer.append({"port": port, "status": "close"})
+    s.close()
 
 
 def scanner(ip, start, end):
