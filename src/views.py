@@ -14,8 +14,11 @@ async def ports_scanner(request):
         start = int(request.match_info['start'])
         end = int(request.match_info['end'])
     except socket.error:
+        log(syslog.LOG_ERR, request)
         return web.Response(text="Invalid host.")
     except ValueError:
+        log(syslog.LOG_ERR, request)
         return web.Response(text="Invalid port.")
     answer = scanner(ip, start, end)
     return web.json_response(answer)
+

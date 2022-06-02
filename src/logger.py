@@ -1,4 +1,5 @@
-from syslog import syslog
+import syslog
+
 
 def log(level, request):
-    pass
+    syslog.syslog(level, f'{level} {request.method} {request.path} {request.remote}')
