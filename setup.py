@@ -7,7 +7,7 @@ setup(name='port-scanner',
 	author='stirk',
 	author_email='stirk-delovoy@mail.ru',
 	license='MIT',
-	packages=['port-scanner', 'port-scanner/src', 'port-scanner/test'],
+	packages=['port-scanner', 'port-scanner/src'],
 	install_requires=['aiohttp==3.8.1'],
 	include_package_data=True,
 	)
