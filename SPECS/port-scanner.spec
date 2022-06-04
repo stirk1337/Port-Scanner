@@ -1,11 +1,11 @@
 %global lowname port_scanner
 %global upname port-scanner
 
-Name:           python3-${upname}
+Name:           %{upname}
 Version:        1.0
 Release:        1%{?dist}
 Summary:        Port Scanner
-BuildArch: 	noarch  
+BuildArch: 	noarch
 
 License:        MIT
 URL:            https://github.com/stirk1337/%{upname}
@@ -18,7 +18,7 @@ BuildRequires:  python3-setuptools
 Port Scanner
 
 %prep
-%autosetup -n port-scanner-%{version}
+%autosetup -n %{upname}
 
 %build
 %py3_build
@@ -28,10 +28,10 @@ Port Scanner
 %py3_install
 
 
-%files -n port-scanner
+%files -n %{upname}
 %doc README.md
-%{python3_sitelib}/port-scanner
-%{python3_sitelib}/port_scanner-1.0-py3.10.egg-info/
+%{python3_sitelib}/%{upname}
+%{python3_sitelib}/%{lowname}-%{version}-py3.10.egg-info/
 
 %changelog
 * Fri Jun 03 2022 stirk
